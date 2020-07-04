@@ -1,0 +1,27 @@
+{
+  "extends": ["eslint:all", "airbnb-base",   "prettier"],
+  "parser": "babel-eslint",
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "globals": {
+    "console": true,
+    "Promise": true
+  },
+  "rules": {
+    "arrow-body-style": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "no-console": 0,
+    "no-plusplus": 0,
+    "no-underscore-dangle":0,
+
+    "import/prefer-default-export": 1,
+    "no-param-reassign": 1,
+    "no-unused-expressions": 1,
+    "no-unused-vars": 1,
+    "prefer-promise-reject-errors": 1
+  }
+}

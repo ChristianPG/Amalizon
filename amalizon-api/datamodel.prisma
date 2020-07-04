@@ -1,0 +1,13 @@
+type Product {
+  id: ID! @id
+  name: String @unique
+  description: String!
+  picture: String!
+  price: Float!
+  categories: [Category!]!
+}
+
+type Category {
+  id: ID! @id
+  name: String @unique
+}
