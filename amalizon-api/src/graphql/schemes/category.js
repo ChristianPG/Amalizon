@@ -1,14 +1,14 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 module.exports = {
   type: gql`
     type Category {
       id: ID!
-      name: String!,
+      name: String!
     }
 
     input createCategoryInput {
-      name: String!,
+      name: String!
     }
   `,
 
@@ -19,5 +19,5 @@ module.exports = {
 
   mutations: `
     createCategory(input: createCategoryInput!): Category!
-  `,
+  `
 };

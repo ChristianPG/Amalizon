@@ -1,0 +1,10 @@
+<div class="cart-container">
+  <img
+    class="cart-picture"
+    src="../../../assets/cart.svg"
+    alt="Amalizon - Get anything you want."
+  />
+  <span [ngClass]="[cartLength > 9 ? 'large-counter' : 'short-counter']">{{
+    cartLength
+  }}</span>
+</div>

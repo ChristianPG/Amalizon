@@ -1,0 +1,29 @@
+$colors: (
+  primary: #ff8e2e,
+  primary-light: lighten(#ff8e2e, 40%),
+  primary-dark: darken(#ff8e2e, 40%),
+  accent: #607d8b,
+  background: #eaeded,
+  text-primary: #000000,
+  text-accent: #FFFFFF,
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$font-sizes: (
+  h1: 60px,
+  h2: 30px,
+  h3: 25px,
+  p: 16px,
+);
+
+@function font-size($type) {
+  @return map-get($font-sizes, $type);
+}
+
+$padding: 15px;
+$borders: 15px;
+
+$minDesktopWidth: 840px;

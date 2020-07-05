@@ -1,0 +1,4 @@
+<p *ngFor="let product of products">{{ product.name }}</p>
+
+<button (click)="previousPage()" [disabled]="page < 2">Previous</button>
+<button (click)="nextPage()">Next</button>

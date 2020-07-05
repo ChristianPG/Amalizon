@@ -1,0 +1,43 @@
+@import './variables';
+
+@mixin desktop {
+  @media (min-width: #{$minDesktopWidth}) {
+    @content;
+  }
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin h1 {
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 62px;
+}
+
+@mixin h2 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 37px;
+}
+
+@mixin h3 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+@mixin p {
+  font-size: 16px;
+  line-height: 20px;
+}

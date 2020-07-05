@@ -1,0 +1,10 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
+
+header {
+  @include flex-row;
+
+  background-color: color(accent);
+  color: color(text-accent);
+  padding: $padding;
+}

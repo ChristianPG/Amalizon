@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Apollo, Query } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { categories } from './types/categories';

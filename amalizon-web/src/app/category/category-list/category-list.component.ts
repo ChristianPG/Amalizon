@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CategoryService } from '../category.service';
 import { Subscription } from 'rxjs';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-category-list',
