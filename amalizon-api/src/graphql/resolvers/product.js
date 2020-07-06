@@ -4,7 +4,36 @@ module.exports = {
       return context.db.query.products({}, info);
     },
 
-    searchProducts(parent, args, context, info) {
+    async numberOfPagesByCondition(parent, args, context) {
+      const { input } = args;
+      let condition = {
+        name_contains: input.keyword
+      };
+
+      if (input.categoryId !== "all") {
+        condition = {
+          ...condition,
+          categories_some: {
+            id: input.categoryId
+          }
+        };
+      }
+
+      const productCount = (
+        await context.db.query.productsConnection(
+          {
+            where: condition
+          },
+          `{
+          aggregate { count }
+        }`
+        )
+      ).aggregate.count;
+
+      return Math.ceil(productCount / input.pageSize);
+    },
+
+    async searchProducts(parent, args, context, info) {
       const { input } = args;
       let condition = {
         name_contains: input.keyword

@@ -13,6 +13,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: any[];
   loading = true;
   errors: any;
+  visiblePages = [];
+  numberOfPages = 1;
   page = 1;
   pageSize = 2;
   category = '';
@@ -34,18 +36,35 @@ export class ProductListComponent implements OnInit, OnDestroy {
           this.page = pageNumber ? (pageNumber > 1 ? pageNumber : 1) : 1;
           this.category = params['category'] || 'all';
           this.keyword = params['keyword'] || '';
-          return this.productService.searchProducts(
+          return this.productService.numberOfPagesByCondition(
             this.pageSize,
-            this.page,
             this.keyword,
             this.category
           );
+        }),
+        switchMap((result) => {
+          this.numberOfPages =
+            result.data && result.data.numberOfPagesByCondition;
+          this.page =
+            this.page >= this.numberOfPages ? this.numberOfPages : this.page;
+
+          return this.page
+            ? this.productService.searchProducts(
+                this.pageSize,
+                this.page,
+                this.keyword,
+                this.category
+              )
+            : of({ data: { searchProducts: [] }, loading: false, errors: [] });
         })
       )
       .subscribe((result) => {
-        this.products = result.data && result.data.searchProducts;
-        this.loading = result.loading;
-        this.errors = result.errors;
+        if (result) {
+          this.products = result.data && result.data.searchProducts;
+          this.loading = result.loading;
+          this.errors = result.errors;
+          this.getVisiblePages();
+        }
       });
   }
 
@@ -53,18 +72,47 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.querySubscription.unsubscribe();
   }
 
-  nextPage() {
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: { page: this.page + 1 },
-      queryParamsHandling: 'merge',
-    });
+  getVisiblePages() {
+    this.visiblePages = [];
+    let lowerLimit = this.page - 3;
+    let upperLimit = this.page + 3;
+    if (lowerLimit < 1) {
+      const excess = 1 - lowerLimit;
+      lowerLimit = 1;
+      upperLimit += excess;
+    }
+    if (upperLimit > this.numberOfPages) {
+      const excess = upperLimit - this.numberOfPages;
+      upperLimit = this.numberOfPages;
+      lowerLimit -= excess;
+    }
+    for (let index = lowerLimit; index <= upperLimit; index++) {
+      if (index >= 1 && index <= this.numberOfPages) {
+        this.visiblePages.push(index);
+      }
+    }
   }
 
   previousPage() {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: { page: this.page - 1 },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  setPage(page: Number) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { page: page },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  nextPage() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { page: this.page + 1 },
       queryParamsHandling: 'merge',
     });
   }

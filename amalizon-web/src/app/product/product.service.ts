@@ -8,6 +8,23 @@ import gql from 'graphql-tag';
 export class ProductService {
   constructor(private apollo: Apollo) {}
 
+  numberOfPagesByCondition(
+    pageSize: Number,
+    keyword: String,
+    categoryId: String
+  ) {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query numberOfPagesByCondition($input: numberOfPagesByConditionInput!) {
+          numberOfPagesByCondition(input: $input)
+        }
+      `,
+      variables: {
+        input: { pageSize, keyword, categoryId },
+      },
+    }).valueChanges;
+  }
+
   searchProducts(
     pageSize: Number,
     page: Number,
