@@ -10,8 +10,8 @@ export class ProductService {
 
   numberOfPagesByCondition(
     pageSize: Number,
-    keyword: String,
-    categoryId: String
+    keyword: string,
+    categoryId: string
   ) {
     return this.apollo.watchQuery<any>({
       query: gql`
@@ -28,8 +28,8 @@ export class ProductService {
   searchProducts(
     pageSize: Number,
     page: Number,
-    keyword: String,
-    categoryId: String
+    keyword: string,
+    categoryId: string
   ) {
     return this.apollo.watchQuery<any>({
       query: gql`
@@ -49,6 +49,29 @@ export class ProductService {
       `,
       variables: {
         input: { pageSize, page, keyword, categoryId },
+      },
+    }).valueChanges;
+  }
+
+  getProductById(id: string) {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query productById($id: ID!) {
+          productById(id: $id) {
+            id
+            name
+            description
+            picture
+            price
+            categories {
+              id
+              name
+            }
+          }
+        }
+      `,
+      variables: {
+        id,
       },
     }).valueChanges;
   }

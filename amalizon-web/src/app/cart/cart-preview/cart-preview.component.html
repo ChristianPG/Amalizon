@@ -1,10 +1,17 @@
 <div class="cart-container">
-  <img
-    class="cart-picture"
-    src="../../../assets/cart.svg"
-    alt="Amalizon - Get anything you want."
-  />
-  <span [ngClass]="[cartLength > 9 ? 'large-counter' : 'short-counter']">{{
-    cartLength
-  }}</span>
+  <a routerLink="/cart" routerLinkActive="active">
+    <img
+      class="cart-picture"
+      src="../../../assets/cart.svg"
+      alt="Amalizon - Get anything you want."
+    />
+    <span
+      [ngClass]="[
+        cartService.numberOfProductsIncart > 9
+          ? 'large-counter'
+          : 'short-counter'
+      ]"
+      >{{ cartService.numberOfProductsIncart }}</span
+    >
+  </a>
 </div>

@@ -21,7 +21,6 @@ export class CategoryListComponent implements OnInit, OnDestroy  {
       this.categories = result.data && result.data.categories;
       this.loading = result.loading;
       this.errors = result.errors;
-      console.log(result);
     });
 
     // this.categoryService.createCategory('Technology').subscribe(result => {

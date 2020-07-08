@@ -28,8 +28,6 @@ export class SearchBarComponent implements OnInit {
     ]),
   });
 
-  private querySubscription: Subscription;
-
   constructor(
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,

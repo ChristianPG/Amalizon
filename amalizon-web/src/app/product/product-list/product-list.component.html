@@ -1,5 +1,13 @@
-<p *ngFor="let product of products">{{ product.name }}</p>
+<ul>
+  <li *ngFor="let product of products">
+    <a routerLink="/product/{{ product.id }}" routerLinkActive="active">{{
+      product.name
+    }}</a>
+  </li>
+</ul>
 
 <button (click)="previousPage()" [disabled]="page < 2">Previous</button>
-<button *ngFor="let visiblePage of visiblePages" (click)="setPage(visiblePage)">{{visiblePage}}</button>
+<button *ngFor="let visiblePage of visiblePages" (click)="setPage(visiblePage)">
+  {{ visiblePage }}
+</button>
 <button (click)="nextPage()" [disabled]="page >= numberOfPages">Next</button>

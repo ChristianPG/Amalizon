@@ -1,0 +1,6 @@
+<div *ngIf="!loading && !errors">
+  <h1>{{product.name}}</h1>
+  <p>{{product.description}}</p>
+  <h1>{{product.price}}</h1>
+  <button (click)="addToCart()">Add to Cart</button>
+</div>

@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let product of cartService.cartProducts">
+    <a routerLink="/product/{{ product.id }}" routerLinkActive="active"
+      ><h1>{{ product.name }}</h1></a
+    >
+    <h2>{{ product.quantity }}</h2>
+    <h2>{{ product.price }}</h2>
+    <button (click)="removeProduct(product.id)">Remove</button>
+  </li>
+</ul>
