@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProductService } from '../product.service';
 import { CartService } from '../../cart/cart.service';
@@ -9,10 +10,11 @@ import { CartService } from '../../cart/cart.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   product = null;
   loading = true;
   errors: any;
+  subscription: Subscription;
 
   constructor(
     private cartService: CartService,
@@ -21,20 +23,21 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap
+    this.subscription = this.activatedRoute.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
-          // console.log(params.get('productId'));
           return this.productService.getProductById(params.get('productId'));
         })
       )
       .subscribe((result) => {
-        // console.log(result);
         this.product = result.data && result.data.productById;
         this.loading = result.loading;
         this.errors = result.errors;
-        // console.log(this.product);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   addToCart() {

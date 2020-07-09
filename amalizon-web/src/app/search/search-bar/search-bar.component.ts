@@ -36,10 +36,14 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.searchForm.controls['selectedCategoryId'].setValue(
-        params['category'] || 'all'
-      );
-      this.searchForm.controls['keyword'].setValue(params['keyword'] || '');
+      if (params['category']) {
+        this.searchForm.controls['selectedCategoryId'].setValue(
+          params['category']
+        );
+      }
+      if (params['keyword']) {
+        this.searchForm.controls['keyword'].setValue(params['keyword']);
+      }
     });
     this.categoryService.getCategories().subscribe((result) => {
       this.categories = result.data && result.data.categories;

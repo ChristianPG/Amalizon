@@ -1,0 +1,9 @@
+@import "src/assets/styles/mixins";
+
+.cart-detail-container {
+  @include flex-column;
+
+  @include desktop {
+    @include flex-row;
+  }
+}

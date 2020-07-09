@@ -2,18 +2,12 @@
 @import "src/assets/styles/mixins";
 
 .cart-container {
-  // @include flex-row;
   position: relative;
-  // width: 70px;
-  // height: 70px;
-  // left: 1791px;
-  // top: 12px;
 }
 
 .cart-picture {
   width: 50px;
   height: 50px;
-  // padding: $padding;
 }
 
 span {

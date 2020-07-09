@@ -11,22 +11,6 @@ import { createCategory } from './types/createCategory';
 export class CategoryService {
   constructor(private apollo: Apollo) {}
 
-  createCategory(name: string) {
-    return this.apollo.mutate<createCategory>({
-      mutation: gql`
-        mutation createCategory($input: createCategoryInput!) {
-          createCategory(input: $input) {
-            id
-            name
-          }
-        }
-      `,
-      variables: {
-        input: { name },
-      },
-    });
-  }
-
   getCategories() {
     return this.apollo.watchQuery<categories>({
       query: gql`

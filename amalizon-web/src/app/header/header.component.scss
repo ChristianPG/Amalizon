@@ -8,3 +8,22 @@ header {
   color: color(text-accent);
   padding: $padding;
 }
+
+.logo-search-section {
+  @include flex-column;
+
+  width: 100%;
+  padding: 0 10px 0 0;
+
+  @include desktop {
+    @include flex-row;
+
+    padding: 0;
+  }
+}
+
+app-search-bar {
+  @include desktop {
+    padding: 0 40px;
+  }
+}

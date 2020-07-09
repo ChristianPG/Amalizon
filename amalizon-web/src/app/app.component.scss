@@ -1,3 +1,9 @@
+@import "src/assets/styles/mixins";
+
 .route-content {
-  padding: 0 20%;
+  padding: 0 5%;
+
+  @include desktop {
+    padding: 0 10%;
+  }
 }

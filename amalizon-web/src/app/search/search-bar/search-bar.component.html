@@ -1,12 +1,15 @@
-<div class="bar-container">
-  <form class="form-container" [formGroup]="searchForm" (ngSubmit)="search()">
-    <select formControlName="selectedCategoryId">
-      <option value="all">All Categories</option>
-      <option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </option>
-    </select>
-    <input type="text" formControlName="keyword" />
-    <button type="submit" [disabled]="!searchForm.valid">s</button>
-  </form>
-</div>
+<form class="form-container" [formGroup]="searchForm" (ngSubmit)="search()">
+  <select class='category-selector' formControlName="selectedCategoryId">
+    <option value="all">All Categories</option>
+    <option *ngFor="let category of categories" [value]="category.id">
+      {{ category.name }}
+    </option>
+  </select>
+  <input class='search-input' type="text" formControlName="keyword" />
+  <button class='submit-button' type="submit" [disabled]="!searchForm.valid">
+    <img
+      src="../../../assets/search-icon.svg"
+      alt="Amalizon - Get anything you want."
+    />
+  </button>
+</form>
