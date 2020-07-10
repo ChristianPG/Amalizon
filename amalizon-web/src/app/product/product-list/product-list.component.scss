@@ -1,5 +1,90 @@
+@import "src/assets/styles/variables";
 @import "src/assets/styles/mixins";
 
-button {
-  @include primary-button;
+.list-container {
+  @include flex-column;
+
+  align-items: stretch;
+  min-height: 80vh;
+
+  .product-preview {
+    all: unset;
+    @include flex-row;
+
+    justify-content: left;
+    cursor: pointer;
+    background-color: white;
+    border: solid 2px color(primary);
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 5px;
+    color: color(accent);
+
+    &:hover {
+      opacity: 0.8;
+      color: color(primary);
+    }
+
+    @include desktop {
+      margin: $common-spacing 0;
+      padding: $common-spacing;
+    }
+
+    .preview-image {
+      max-height: 100px;
+      min-height: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      object-fit: contain;
+      margin-right: $common-spacing;
+
+      @include desktop {
+        max-height: 150px;
+        min-height: 150px;
+        max-width: 150px;
+        min-width: 150px;
+      }
+    }
+
+    .product-information {
+      @include flex-column;
+
+      align-items: flex-start;
+
+      .product-name {
+        @include p;
+
+        @include desktop {
+          @include h3;
+        }
+      }
+
+      .product-price {
+        @include h2;
+      }
+    }
+  }
+
+  .page-selector {
+    @include flex-row;
+
+    margin-top: $common-spacing;
+
+    @include desktop {
+      align-self: center;
+      width: 400px;
+    }
+
+    button {
+      @include primary-button;
+
+      min-width: 20px;
+      text-align: center;
+
+      &.active {
+        background-color: color(primary-dark);
+        cursor: default;
+      }
+    }
+  }
 }

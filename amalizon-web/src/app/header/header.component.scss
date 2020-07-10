@@ -1,19 +1,19 @@
-@import "src/assets/styles/variables";
 @import "src/assets/styles/mixins";
+@import "src/assets/styles/variables";
 
 header {
   @include flex-row;
 
   background-color: color(accent);
   color: color(text-accent);
-  padding: $padding;
+  padding: $common-spacing;
 }
 
 .logo-search-section {
   @include flex-column;
 
   width: 100%;
-  padding: 0 10px 0 0;
+  padding: 0 $common-spacing 0 0;
 
   @include desktop {
     @include flex-row;

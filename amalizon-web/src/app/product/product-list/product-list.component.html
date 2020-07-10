@@ -1,13 +1,47 @@
-<ul>
-  <li *ngFor="let product of products">
-    <a routerLink="/product/{{ product.id }}" routerLinkActive="active">{{
-      product.name
-    }}</a>
-  </li>
-</ul>
+<!-- <ul>
 
-<button (click)="previousPage()" [disabled]="page < 2">Previous</button>
-<button *ngFor="let visiblePage of visiblePages" (click)="setPage(visiblePage)">
-  {{ visiblePage }}
-</button>
-<button (click)="nextPage()" [disabled]="page >= numberOfPages">Next</button>
+  <li *ngFor="let product of products">
+    <a routerLink="/product/{{ product.id }}">{{ product.name }}</a>
+  </li>
+</ul> -->
+<div class="list-container">
+  <div
+    routerLink="/product/{{ product.id }}"
+    class="product-preview"
+    *ngFor="let product of products"
+  >
+    <img
+      class="preview-image"
+      src="https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg"
+      alt="Get {{ product.name }} on Amalizon"
+    />
+    <div class="product-information">
+      <span class="product-name">{{ product.name }}</span>
+      <span class="product-price">${{ product.price }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="numberOfPages > 1" class="page-selector">
+    <button (click)="previousPage()" [disabled]="page < 2">
+      <img
+        src="../../../assets/arrow-left.svg"
+        alt="Amalizon - Get anything you want."
+      />
+    </button>
+    <button
+      *ngFor="let visiblePage of visiblePages"
+      queryParamsHandling="merge"
+      [routerLink]="[{}]"
+      [queryParams]="{ page: visiblePage }"
+      routerLinkActive="active"
+    >
+      {{ visiblePage }}
+    </button>
+    <button (click)="nextPage()" [disabled]="page >= numberOfPages">
+      <img
+        src="../../../assets/arrow-right.svg"
+        alt="Amalizon - Get anything you want."
+      />
+    </button>
+  </div>
+</div>

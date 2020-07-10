@@ -26,7 +26,6 @@ $font-sizes: (
   @return map-get($font-sizes, $type);
 }
 
-$padding: 15px;
-$borders: 15px;
+$common-spacing: 10px;
 
 $minDesktopWidth: 840px;
