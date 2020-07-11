@@ -1,0 +1,122 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
+
+.product-detail-container {
+  background-color: white;
+  color: color(accent);
+  padding: $common-spacing;
+  border-radius: $common-border-radius;
+
+  @include desktop {
+    padding: $common-spacing * 2;
+  }
+
+  .general-title {
+    @include h4;
+
+    color: color(accent);
+
+    @include desktop {
+      @include h3;
+    }
+  }
+
+  .product-header {
+    @include flex-column;
+
+    margin: $common-spacing * 2 0;
+
+    @include desktop {
+      @include flex-row;
+
+      justify-content: space-around;
+      margin: $common-spacing * 4 0;
+    }
+
+    .main-information {
+      @include flex-column;
+
+      margin: 0 0 $common-spacing * 2 0;
+
+      .product-name {
+        @include h4;
+
+        @include desktop {
+          @include h2;
+        }
+      }
+
+      .product-seller {
+        @include p2;
+
+        @include desktop {
+          @include p1;
+        }
+      }
+
+      .preview-image {
+        max-height: 300px;
+        min-height: 300px;
+        max-width: 90%;
+        min-width: 90%;
+        object-fit: contain;
+
+        @include desktop {
+          max-height: 400px;
+          min-height: 400px;
+          max-width: 400px;
+          min-width: 400px;
+        }
+      }
+    }
+
+    .checkout-container {
+      @include flex-column;
+
+      align-items: flex-start;
+      width: 100%;
+      align-items: stretch;
+
+      @include desktop {
+        width: unset;
+      }
+
+      .product-price {
+        // @include flex-row;
+        @include h3;
+
+        color: color(primary);
+        margin: 0 0 $common-spacing * 2 0;
+
+        @include desktop {
+          @include h2;
+        }
+      }
+
+      button {
+        @include primary-button;
+
+        &.active {
+          background-color: color(primary-dark);
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .product-content {
+    .description-container {
+      @include flex-column;
+
+      align-items: flex-start;
+
+      .product-description {
+        @include p2;
+
+        @include desktop {
+          @include p1;
+        }
+      }
+    }
+  }
+}

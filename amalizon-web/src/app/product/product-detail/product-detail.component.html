@@ -1,6 +1,27 @@
-<div *ngIf="!loading && !errors">
-  <h1>{{product.name}}</h1>
-  <p>{{product.description}}</p>
-  <h1>{{product.price}}</h1>
-  <button (click)="addToCart()">Add to Cart</button>
+<div *ngIf="!loading && !errors" class="product-detail-container">
+  <div class="product-header" *ngIf="!loading && !errors">
+    <div class="main-information">
+      <span class="product-name">{{ product.name }}</span>
+      <span class="product-seller"
+        >by {{ product.seller?.name || "Amalizon" }}</span
+      >
+      <img
+        class="preview-image"
+        [src]="product.picture || 'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'"
+        alt="Get {{ product.name }} on Amalizon"
+      />
+    </div>
+    <div class="checkout-container">
+      <span class="product-price">
+        <span class="general-title">{{'Price: '}}</span> ${{ product.price }}
+      </span>
+      <button (click)="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+  <div class="product-content">
+    <div class="description-container">
+      <span class="general-title">Description:</span>
+      <span class="product-description">{{ product.description }}</span>
+    </div>
+  </div>
 </div>

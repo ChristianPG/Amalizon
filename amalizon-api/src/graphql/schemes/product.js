@@ -9,6 +9,12 @@ module.exports = {
       picture: String!
       price: Float!
       categories: [Category!]!
+      seller: Seller
+    }
+
+    type Seller {
+      id: ID!
+      name: String!
     }
 
     input createProductInput {
@@ -35,6 +41,11 @@ module.exports = {
     input connectCategoryInput {
       id: ID!
     }
+
+    input updatePictureInput {
+      id: ID!
+      url: String!
+    }
   `,
 
   queries: `
@@ -46,5 +57,6 @@ module.exports = {
 
   mutations: `
     createProduct(input: createProductInput!): Product!
+    updatePicture(input: updatePictureInput!): Product!
   `
 };

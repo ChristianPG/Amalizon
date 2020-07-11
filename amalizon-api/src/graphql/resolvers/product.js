@@ -86,6 +86,21 @@ module.exports = {
         },
         info
       );
+    },
+    updatePicture: async (parent, args, context, info) => {
+      const { input } = args;
+
+      return context.db.mutation.updateProduct(
+        {
+          where: {
+            id: input.id,
+          },
+          data: {
+            picture: input.url,
+          },
+        },
+        info
+      );
     }
   }
 };

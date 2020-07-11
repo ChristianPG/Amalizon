@@ -6,4 +6,146 @@
   @include desktop {
     @include flex-row;
   }
+
+  .general-title {
+    @include h4;
+
+    color: color(accent);
+
+    @include desktop {
+      @include h3;
+    }
+  }
+
+  .list-container {
+    @include flex-column;
+
+    width: 100%;
+    align-items: stretch;
+
+    @include desktop {
+      width: 80%;
+      padding-right: $common-spacing;
+    }
+
+    .product-preview {
+      @include flex-row;
+
+      justify-content: left;
+      background-color: white;
+      border: solid 2px color(primary);
+      border-radius: $common-border-radius;
+      margin: 2px 0;
+      padding: 5px;
+      color: color(accent);
+
+      @include desktop {
+        margin: 5px 0;
+        padding: $common-spacing;
+      }
+
+      .preview-image {
+        max-height: 100px;
+        min-height: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        object-fit: contain;
+        margin-right: $common-spacing * 2;
+        cursor: pointer;
+
+        @include desktop {
+          max-height: 150px;
+          min-height: 150px;
+          max-width: 150px;
+          min-width: 150px;
+        }
+      }
+
+      .product-information {
+        @include flex-column;
+
+        align-items: flex-start;
+        width: 100%;
+
+        .product-name {
+          @include p1;
+
+          font-weight: 600;
+          cursor: pointer;
+
+          @include desktop {
+            @include h2;
+          }
+
+          &:hover {
+            color: color(primary);
+          }
+        }
+
+        .product-seller {
+          @include p2;
+
+          @include desktop {
+            @include p1;
+          }
+        }
+
+        .product-price {
+          @include h3;
+
+          color: color(primary);
+
+          @include desktop {
+            @include h2;
+          }
+        }
+
+        .quantity-container {
+          @include flex-row;
+
+          align-self: flex-end;
+          margin-top: $common-spacing;
+
+          .product-quantity {
+            @include h3;
+
+            min-width: 60px;
+            color: color(primary);
+            text-align: center;
+
+            @include desktop {
+              @include h2;
+            }
+          }
+
+          .increase-button {
+            @include primary-button;
+
+            min-width: $common-min-button-width;
+          }
+
+          .decrease-button {
+            @include accent-button;
+
+            min-width: $common-min-button-width;
+          }
+
+          .remove-button {
+            @include accent-button;
+            margin-left: $common-spacing;
+          }
+        }
+      }
+    }
+  }
+
+  .total {
+    @include h2;
+
+    color: color(primary);
+
+    @include desktop {
+      @include h2;
+    }
+  }
 }

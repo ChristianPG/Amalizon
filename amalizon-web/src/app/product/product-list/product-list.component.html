@@ -1,10 +1,4 @@
-<!-- <ul>
-
-  <li *ngFor="let product of products">
-    <a routerLink="/product/{{ product.id }}">{{ product.name }}</a>
-  </li>
-</ul> -->
-<div class="list-container">
+<div *ngIf="!loading && !errors" class="list-container">
   <div
     routerLink="/product/{{ product.id }}"
     class="product-preview"
@@ -12,11 +6,14 @@
   >
     <img
       class="preview-image"
-      src="https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg"
+      [src]="product.picture || 'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'"
       alt="Get {{ product.name }} on Amalizon"
     />
     <div class="product-information">
       <span class="product-name">{{ product.name }}</span>
+      <span class="product-seller"
+        >by {{ product.seller?.name || "Amalizon" }}</span
+      >
       <span class="product-price">${{ product.price }}</span>
     </div>
   </div>

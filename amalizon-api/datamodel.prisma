@@ -5,9 +5,15 @@ type Product {
   picture: String!
   price: Float!
   categories: [Category!]!
+  seller: Seller
 }
 
 type Category {
+  id: ID! @id
+  name: String @unique
+}
+
+type Seller {
   id: ID! @id
   name: String @unique
 }

@@ -15,8 +15,8 @@
     cursor: pointer;
     background-color: white;
     border: solid 2px color(primary);
-    border-radius: 5px;
-    margin: 5px 0;
+    border-radius: $common-border-radius;
+    margin: 2px 0;
     padding: 5px;
     color: color(accent);
 
@@ -26,7 +26,7 @@
     }
 
     @include desktop {
-      margin: $common-spacing 0;
+      margin: 5px 0;
       padding: $common-spacing;
     }
 
@@ -36,13 +36,13 @@
       max-width: 100px;
       min-width: 100px;
       object-fit: contain;
-      margin-right: $common-spacing;
+      margin-right: $common-spacing * 2;
 
       @include desktop {
-        max-height: 150px;
-        min-height: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        max-height: 200px;
+        min-height: 200px;
+        max-width: 200px;
+        min-width: 200px;
       }
     }
 
@@ -52,15 +52,29 @@
       align-items: flex-start;
 
       .product-name {
-        @include p;
+        @include p1;
+
+        font-weight: 600;
 
         @include desktop {
-          @include h3;
+          @include h2;
+        }
+      }
+
+      .product-seller {
+        @include p2;
+
+        @include desktop {
+          @include p1;
         }
       }
 
       .product-price {
-        @include h2;
+        @include h3;
+
+        @include desktop {
+          @include h2;
+        }
       }
     }
   }
@@ -78,8 +92,7 @@
     button {
       @include primary-button;
 
-      min-width: 20px;
-      text-align: center;
+      min-width: $common-min-button-width;
 
       &.active {
         background-color: color(primary-dark);

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ParamMap, ActivatedRoute } from '@angular/router';
+import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProductService } from '../product.service';
@@ -19,7 +19,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,5 +43,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   addToCart() {
     this.cartService.addProductToCart(this.product, 1);
+    this.router.navigate(['cart']);
   }
 }

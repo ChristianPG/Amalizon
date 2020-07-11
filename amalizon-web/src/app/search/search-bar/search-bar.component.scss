@@ -13,7 +13,7 @@
   all: unset;
   align-items: center;
   background: color(primary);
-  border-radius: 5px;
+  border-radius: $common-border-radius;
   cursor: pointer;
   height: 40px;
   padding: 0 $common-spacing;
@@ -22,7 +22,7 @@
 .search-input {
   all: unset;
   background: color(input-background);
-  border-radius: 5px;
+  border-radius: $common-border-radius;
   color: color(accent);
   height: 40px;
   padding: 0 $common-spacing;

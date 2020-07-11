@@ -33,6 +33,7 @@ export class CartService {
       id: product.id,
       name: product.name,
       price: product.price,
+      picture: product.picture,
       quantity:
         productInCart && productInCart.id === product.id
           ? productInCart.quantity + quantityToAdd

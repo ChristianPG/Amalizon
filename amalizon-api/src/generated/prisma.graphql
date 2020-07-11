@@ -1,11 +1,15 @@
 # source: http://localhost:4566
-# timestamp: Wed Jul 01 2020 22:56:03 GMT-0500 (Colombia Standard Time)
+# timestamp: Sat Jul 11 2020 09:47:41 GMT-0500 (Colombia Standard Time)
 
 type AggregateCategory {
   count: Int!
 }
 
 type AggregateProduct {
+  count: Int!
+}
+
+type AggregateSeller {
   count: Int!
 }
 
@@ -339,16 +343,22 @@ scalar Long
 
 type Mutation {
   createProduct(data: ProductCreateInput!): Product!
+  createSeller(data: SellerCreateInput!): Seller!
   createCategory(data: CategoryCreateInput!): Category!
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateSeller(data: SellerUpdateInput!, where: SellerWhereUniqueInput!): Seller
   updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteSeller(where: SellerWhereUniqueInput!): Seller
   deleteCategory(where: CategoryWhereUniqueInput!): Category
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  upsertSeller(where: SellerWhereUniqueInput!, create: SellerCreateInput!, update: SellerUpdateInput!): Seller!
   upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
+  updateManySellers(data: SellerUpdateManyMutationInput!, where: SellerWhereInput): BatchPayload!
   updateManyCategories(data: CategoryUpdateManyMutationInput!, where: CategoryWhereInput): BatchPayload!
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  deleteManySellers(where: SellerWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -391,6 +401,7 @@ type Product implements Node {
   picture: String!
   price: Float!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
+  seller: Seller
 }
 
 """A connection to a list of items."""
@@ -410,6 +421,7 @@ input ProductCreateInput {
   picture: String!
   price: Float!
   categories: CategoryCreateManyInput
+  seller: SellerCreateOneInput
 }
 
 """An edge in a connection."""
@@ -485,6 +497,7 @@ input ProductUpdateInput {
   picture: String
   price: Float
   categories: CategoryUpdateManyInput
+  seller: SellerUpdateOneInput
 }
 
 input ProductUpdateManyMutationInput {
@@ -688,6 +701,7 @@ input ProductWhereInput {
   categories_every: CategoryWhereInput
   categories_some: CategoryWhereInput
   categories_none: CategoryWhereInput
+  seller: SellerWhereInput
 }
 
 input ProductWhereUniqueInput {
@@ -697,10 +711,13 @@ input ProductWhereUniqueInput {
 
 type Query {
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  sellers(where: SellerWhereInput, orderBy: SellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Seller]!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   product(where: ProductWhereUniqueInput!): Product
+  seller(where: SellerWhereUniqueInput!): Seller
   category(where: CategoryWhereUniqueInput!): Category
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+  sellersConnection(where: SellerWhereInput, orderBy: SellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SellerConnection!
   categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
 
   """Fetches an object given its ID"""
@@ -710,7 +727,213 @@ type Query {
   ): Node
 }
 
+type Seller implements Node {
+  id: ID!
+  name: String
+}
+
+"""A connection to a list of items."""
+type SellerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SellerEdge]!
+  aggregate: AggregateSeller!
+}
+
+input SellerCreateInput {
+  id: ID
+  name: String
+}
+
+input SellerCreateOneInput {
+  create: SellerCreateInput
+  connect: SellerWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type SellerEdge {
+  """The item at the end of the edge."""
+  node: Seller!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SellerOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type SellerPreviousValues {
+  id: ID!
+  name: String
+}
+
+type SellerSubscriptionPayload {
+  mutation: MutationType!
+  node: Seller
+  updatedFields: [String!]
+  previousValues: SellerPreviousValues
+}
+
+input SellerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SellerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SellerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SellerSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SellerWhereInput
+}
+
+input SellerUpdateDataInput {
+  name: String
+}
+
+input SellerUpdateInput {
+  name: String
+}
+
+input SellerUpdateManyMutationInput {
+  name: String
+}
+
+input SellerUpdateOneInput {
+  create: SellerCreateInput
+  connect: SellerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SellerUpdateDataInput
+  upsert: SellerUpsertNestedInput
+}
+
+input SellerUpsertNestedInput {
+  update: SellerUpdateDataInput!
+  create: SellerCreateInput!
+}
+
+input SellerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SellerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SellerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SellerWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input SellerWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 type Subscription {
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  seller(where: SellerSubscriptionWhereInput): SellerSubscriptionPayload
   category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
 }

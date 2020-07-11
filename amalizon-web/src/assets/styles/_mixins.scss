@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 @mixin desktop {
   @media (min-width: #{$minDesktopWidth}) {
@@ -13,20 +13,30 @@
 }
 
 @mixin h2 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 30px;
   line-height: 37px;
 }
 
 @mixin h3 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 25px;
   line-height: 30px;
 }
 
-@mixin p {
+@mixin h4 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin p1 {
   font-size: 16px;
   line-height: 20px;
+}
+@mixin p2 {
+  font-size: 12px;
+  line-height: 15px;
 }
 
 @mixin flex-row {
@@ -49,18 +59,19 @@
   padding: 5px;
   background-color: color(primary);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: $common-border-radius;
   color: color(text-accent);
+  text-align: center;
 
-  &:active{
+  &:active {
     background-color: color(primary-dark);
   }
 
-  &:hover{
+  &:hover {
     background-color: color(primary-light);
   }
 
-  &:disabled{
+  &:disabled {
     background-color: color(accent-light);
     color: color(accent);
     cursor: default;
@@ -72,8 +83,11 @@
 
   background-color: color(accent);
 
-
-  &:active{
+  &:active {
     background-color: color(accent-dark);
+  }
+
+  &:hover {
+    background-color: color(accent-light);
   }
 }
