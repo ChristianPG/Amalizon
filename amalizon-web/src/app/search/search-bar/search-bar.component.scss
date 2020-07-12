@@ -13,22 +13,25 @@
   all: unset;
   align-items: center;
   background: color(primary);
-  border-radius: $common-border-radius;
+  border-radius: $common-border-radius 0 0 $common-border-radius;
   cursor: pointer;
   height: 40px;
-  padding: 0 $common-spacing;
+  -webkit-appearance: menulist;
 }
 
 .search-input {
   all: unset;
   background: color(input-background);
-  border-radius: $common-border-radius;
   color: color(accent);
   height: 40px;
+  min-width: 0;
   padding: 0 $common-spacing;
   width: 100%;
 }
 
 .submit-button {
   @include primary-button;
+
+
+  border-radius: 0 $common-border-radius $common-border-radius 0;
 }

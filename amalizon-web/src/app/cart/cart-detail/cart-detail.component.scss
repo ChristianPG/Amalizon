@@ -143,6 +143,7 @@
     @include h2;
 
     color: color(primary);
+    margin-top: $common-spacing;
 
     @include desktop {
       @include h2;
