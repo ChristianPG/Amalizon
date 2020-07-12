@@ -118,6 +118,8 @@
       .product-description {
         @include p2;
 
+        white-space: pre-wrap;
+
         @include desktop {
           @include p1;
         }
