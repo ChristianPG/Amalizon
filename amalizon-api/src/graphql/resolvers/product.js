@@ -52,7 +52,8 @@ module.exports = {
         {
           first: input.pageSize,
           skip: (input.page - 1) * input.pageSize,
-          where: condition
+          where: condition,
+          orderBy: 'name_ASC',
         },
         info
       );
