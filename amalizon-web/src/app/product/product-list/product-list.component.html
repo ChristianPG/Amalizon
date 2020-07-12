@@ -6,11 +6,8 @@
   >
     <img
       class="preview-image"
-      [src]="
-        product.picture ||
-        'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'
-      "
-      onerror="this.src='https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg';"
+      [src]="product.picture || 'assets/package.svg'"
+      onerror="this.src='assets/package.svg';"
       alt="Get {{ product.name }} on Amalizon"
     />
     <div class="product-information">
@@ -58,9 +55,14 @@
   />
 </div>
 
-<div
-  class="spinner-container"
-  *ngIf="loading && !errors"
->
+<div class="full-screen-image-container" *ngIf="errors && !loading">
+  <img
+    class="fullscreen-image"
+    src="../../../assets/data-error.svg"
+    alt="Amalizon - Get anything you want."
+  />
+</div>
+
+<div class="spinner-container" *ngIf="loading && !errors">
   <div class="loader"></div>
 </div>

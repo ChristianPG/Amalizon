@@ -30,11 +30,17 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           return this.productService.getProductById(params.get('productId'));
         })
       )
-      .subscribe((result) => {
-        this.product = result.data && result.data.productById;
-        this.loading = result.loading;
-        this.errors = result.errors;
-      });
+      .subscribe(
+        (result) => {
+          this.product = result.data && result.data.productById;
+          this.loading = result.loading;
+          this.errors = result.errors;
+        },
+        (error) => {
+          this.loading = false;
+          this.errors = error;
+        }
+      );
   }
 
   ngOnDestroy(): void {

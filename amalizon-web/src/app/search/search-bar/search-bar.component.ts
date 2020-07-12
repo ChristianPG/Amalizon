@@ -45,11 +45,17 @@ export class SearchBarComponent implements OnInit {
         this.searchForm.controls['keyword'].setValue(params['keyword']);
       }
     });
-    this.categoryService.getCategories().subscribe((result) => {
-      this.categories = result.data && result.data.categories;
-      this.loading = result.loading;
-      this.errors = result.errors;
-    });
+    this.categoryService.getCategories().subscribe(
+      (result) => {
+        this.categories = result.data && result.data.categories;
+        this.loading = result.loading;
+        this.errors = result.errors;
+      },
+      (error) => {
+        this.loading = false;
+        this.errors = error;
+      }
+    );
   }
 
   search() {

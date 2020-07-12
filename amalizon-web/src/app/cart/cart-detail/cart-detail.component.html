@@ -7,11 +7,8 @@
       <img
         routerLink="/product/{{ product.id }}"
         class="preview-image"
-        [src]="
-          product.picture ||
-          'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'
-        "
-        onerror="this.src='https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg';"
+        [src]="product.picture || 'assets/package.svg'"
+        onerror="this.src='assets/package.svg';"
         alt="Get {{ product.name }} on Amalizon"
       />
       <div class="product-information">
@@ -49,7 +46,7 @@
 </div>
 
 <div
-  class="empty-cart-container"
+  class="full-screen-image-container"
   *ngIf="cartService.cartProducts.length < 1"
 >
   <img

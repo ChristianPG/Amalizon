@@ -62,14 +62,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
               });
         })
       )
-      .subscribe((result) => {
-        if (result) {
-          this.products = result.data && result.data.searchProducts;
-          this.loading = result.loading;
-          this.errors = result.errors;
-          this.getVisiblePages();
+      .subscribe(
+        (result) => {
+          if (result) {
+            this.products = result.data && result.data.searchProducts;
+            this.loading = result.loading;
+            this.errors = result.errors;
+            this.getVisiblePages();
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.errors = error;
         }
-      });
+      );
   }
 
   ngOnDestroy(): void {
