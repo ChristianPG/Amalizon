@@ -71,6 +71,10 @@ export class ProductService {
               id
               name
             }
+            seller {
+              id
+              name
+            }
           }
         }
       `,
