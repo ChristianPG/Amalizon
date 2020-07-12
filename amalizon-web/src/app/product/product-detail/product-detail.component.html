@@ -1,4 +1,4 @@
-<div *ngIf="!loading && !errors" class="product-detail-container">
+<div *ngIf="!loading && !errors && product" class="product-detail-container">
   <div class="product-header" *ngIf="!loading && !errors">
     <div class="main-information">
       <span class="product-name">{{ product.name }}</span>
@@ -7,14 +7,17 @@
       >
       <img
         class="preview-image"
-        [src]="product.picture || 'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'"
+        [src]="
+          product.picture ||
+          'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'
+        "
         onerror="this.src='https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg';"
         alt="Get {{ product.name }} on Amalizon"
       />
     </div>
     <div class="checkout-container">
       <span class="product-price">
-        <span class="general-title">{{'Price: '}}</span> ${{ product.price }}
+        <span class="general-title">{{ "Price: " }}</span> ${{ product.price }}
       </span>
       <button (click)="addToCart()">Add to Cart</button>
     </div>
@@ -22,7 +25,26 @@
   <div class="product-content">
     <div class="description-container">
       <span class="general-title">Description:</span>
+      <br />
       <span class="product-description">{{ product.description }}</span>
     </div>
   </div>
+</div>
+
+<div
+  class="full-screen-image-container"
+  *ngIf="!loading && !errors && !product"
+>
+  <img
+    class="fullscreen-image"
+    src="../../assets/not-found.svg"
+    alt="Amalizon - Get anything you want."
+  />
+</div>
+
+<div
+  class="spinner-container"
+  *ngIf="loading && !errors"
+>
+  <div class="loader"></div>
 </div>

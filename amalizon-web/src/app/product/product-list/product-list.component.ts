@@ -55,7 +55,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
                 this.keyword,
                 this.category
               )
-            : of({ data: { searchProducts: [] }, loading: false, errors: [] });
+            : of({
+                data: { searchProducts: [] },
+                loading: false,
+                errors: null,
+              });
         })
       )
       .subscribe((result) => {

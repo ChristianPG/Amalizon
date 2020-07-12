@@ -1,15 +1,5 @@
-<div class="cart-detail-container">
+<div *ngIf="cartService.cartProducts.length > 0" class="cart-detail-container">
   <div class="list-container">
-    <!-- <ul>
-    <li *ngFor="let product of cartService.cartProducts">
-      <a routerLink="/product/{{ product.id }}" routerLinkActive="active"
-        ><h1>{{ product.name }}</h1></a
-      >
-      <h2>{{ product.quantity }}</h2>
-      <h2>{{ product.price }}</h2>
-      <button (click)="removeProduct(product.id)">Remove</button>
-    </li>
-  </ul> -->
     <div
       class="product-preview"
       *ngFor="let product of cartService.cartProducts"
@@ -17,7 +7,10 @@
       <img
         routerLink="/product/{{ product.id }}"
         class="preview-image"
-        [src]="product.picture || 'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'"
+        [src]="
+          product.picture ||
+          'https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg'
+        "
         onerror="this.src='https://res.cloudinary.com/christianpg/image/upload/v1594344603/ckc49b7ra00360787ektuopqk_hkwfwa.jpg';"
         alt="Get {{ product.name }} on Amalizon"
       />
@@ -29,22 +22,39 @@
           >by {{ product.seller?.name || "Amalizon" }}</span
         >
         <span class="product-price">
-          <span class="general-title">Price: </span> ${{
-            product.price
-          }}
+          <span class="general-title">Price: </span> ${{ product.price }}
         </span>
         <div class="quantity-container">
-          <button class="decrease-button" (click)="decreaseQuantity(product)" [disabled]="product.quantity < 2">-</button>
+          <button
+            class="decrease-button"
+            (click)="decreaseQuantity(product)"
+            [disabled]="product.quantity < 2"
+          >
+            -
+          </button>
           <span class="product-quantity">{{ product.quantity }}</span>
-          <button class="increase-button" (click)="increaseQuantity(product)">+</button>
-          <button class="remove-button" (click)="removeProduct(product.id)">Remove</button>
+          <button class="increase-button" (click)="increaseQuantity(product)">
+            +
+          </button>
+          <button class="remove-button" (click)="removeProduct(product.id)">
+            Remove
+          </button>
         </div>
       </div>
     </div>
   </div>
   <span class="total">
-    <span class="general-title">Total: </span> ${{
-      cartService.total
-    }}
+    <span class="general-title">Total: </span> ${{ cartService.total }}
   </span>
+</div>
+
+<div
+  class="empty-cart-container"
+  *ngIf="cartService.cartProducts.length < 1"
+>
+  <img
+    class="fullscreen-image"
+    src="../../assets/empty-cart.svg"
+    alt="Amalizon - Get anything you want."
+  />
 </div>

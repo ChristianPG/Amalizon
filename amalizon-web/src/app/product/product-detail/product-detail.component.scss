@@ -38,8 +38,14 @@
 
       margin: 0 0 $common-spacing * 2 0;
 
+      @include desktop {
+        max-width: 80%;
+      }
+
       .product-name {
         @include h4;
+
+        text-align: center;
 
         @include desktop {
           @include h2;
@@ -82,7 +88,6 @@
       }
 
       .product-price {
-        // @include flex-row;
         @include h3;
 
         color: color(primary);
