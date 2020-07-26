@@ -17,5 +17,8 @@
     "statusBarItem.hoverBackground": "#3bc385",
     "titleBar.border": "#552083"
   },
-  "peacock.color": "#552083"
+  "peacock.color": "#552083",
+  "cSpell.words": [
+    "Amalizon"
+  ]
 }
